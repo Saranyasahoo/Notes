@@ -20,3 +20,28 @@ Improves fault tolerance and resilience.
 
 🚀 Implementation in Spring Boot (with Resilience4j)
 Resilience4j is the most popular library for this purpose in Spring Boot apps.
+
+
+📦 Add Dependencies (Maven)
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot3</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+
+
+⚙️ Configure the Circuit Breaker in application.yml
+resilience4j:
+  circuitbreaker:
+    instances:
+      myServiceCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        minimumNumberOfCalls: 5
+
